@@ -73,7 +73,7 @@ module WordSearch
           grid = _try_word(current[:grid], current[:word], pos, dir)
           if grid
             # Got a solution for this word, it's now in the grid
-            @coords.push(word: current[:word], direction: dir)
+            @coords.push(word: current[:word], direction: dir, pos: pos)
             if words.any?
               # More words to go - add to the stack
               stack.push(grid: grid, word: words.shift, dirs: directions.shuffle,
@@ -87,12 +87,13 @@ module WordSearch
 
       @grid = grid
       @solution = grid.dup
+      
       puts @coords
+      
       @unused_squares = @grid.fill!(@message)
     end
 
     def _try_word(grid, word, position, direction)
-      puts "Trying '#{word}' Pos '#{position}' Dir #{direction}"
       copy = grid.dup
       row, column = copy.at(position)
 
