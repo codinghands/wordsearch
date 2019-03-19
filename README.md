@@ -6,12 +6,17 @@ be hidden in various ways (diagonal, backwards), as well as to include a
 message hidden in the unused squares. The puzzles are emitted as PDF
 documents.
 
+This fork adds an additional output option, `--package`, that creates a
+directory containing the solved and unsolved grids, as well as a CSV of
+clues with their position and direction, into a specified folder.
+
 ## Installation
 
 Use RubyGems:
 
-    $ gem install wordsearch-puzzle
-
+    $ gem install specific_install
+    $ gem specific_install https://github.com/codinghands/wordsearch.git
+    
 ## Usage
 
 The simplest way to use the tool is via the included command-line utility:
@@ -30,6 +35,7 @@ The simplest way to use the tool is via the included command-line utility:
         -m, --message MESSAGE
         -w, --word-file FILE
         -t, --[no-]text
+        -p, --package PACKAGENAME
 
 Specify words in any of three ways; on the command-line:
 
@@ -65,6 +71,8 @@ Program arguments are:
   as the number of unused squares in the puzzle.
 * `--word-file` : a text file containing words to use in the puzzle.
 * `--text` : draw the puzzle to the terminal as text, instead of emitting a PDF
+* `--package` : output a folder containing the solved and unsolved grids, alongside
+  a CSV of words, directions and grid coordinates
 
 ## Encoding Messages
 
