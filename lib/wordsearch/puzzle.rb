@@ -142,7 +142,13 @@ module WordSearch
     
     def package(package: "default")
       puts "Packaging into #{package}"
-      Dir.mkdir package
+      begin
+        Dir.mkdir package
+      rescue Errno::EEXIST => e
+        puts "Cant create directory, already exists!"
+        return
+      end
+      
       solved_grid = to_s(solution: true)
       unsolved_grid = to_s(solution: false)
       clue_coords = clue_coords_to_s()
