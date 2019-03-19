@@ -131,6 +131,10 @@ module WordSearch
 
       s
     end
+    
+    def package(package: "default")
+      puts "packaging as #{package}"
+    end
 
     def to_pdf(box_size: 18, margin: 18, font_name: "Helvetica", clue_font: font_name, solution: true, clues: true)
       height = box_size * @rows
