@@ -97,7 +97,9 @@ module WordSearch
         letter = letters.shift || break
 
         if copy[row, column].nil? || copy[row, column] == letter
-          puts "Letter '#{letter}' in row #{row} col #{column}"
+          if first
+            puts "Letter '#{letter}' in row #{row} col #{column}"
+          end
           copy[row, column] = letter
           row += dr
           column += dc
