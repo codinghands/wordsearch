@@ -74,6 +74,7 @@ module WordSearch
               stack.push(grid: grid, word: words.shift, dirs: directions.shuffle,
                 positions: positions.shuffle)
             else
+              puts pos
               break # success!
             end
           end
