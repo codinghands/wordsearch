@@ -146,9 +146,9 @@ module WordSearch
       solved_grid = to_s(solution: true)
       unsolved_grid = to_s(solution: false)
       clue_coords = clue_coords_to_s()
-      File.open('#{package}/solved.txt', 'w') { |file| file.write(solved_grid) }
-      File.open('#{package}/unsolved.txt', 'w') { |file| file.write(unsolved_grid) }
-      File.open('#{package}/coords.txt', 'w') { |file| file.write(clue_coords) }
+      File.open("#{package}/solved.txt", 'w') { |file| file.write(solved_grid) }
+      File.open("#{package}/unsolved.txt", 'w') { |file| file.write(unsolved_grid) }
+      File.open("#{package}/coords.txt", 'w') { |file| file.write(clue_coords) }
     end
 
     def to_pdf(box_size: 18, margin: 18, font_name: "Helvetica", clue_font: font_name, solution: true, clues: true)
