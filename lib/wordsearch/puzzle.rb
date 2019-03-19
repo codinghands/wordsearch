@@ -70,7 +70,9 @@ module WordSearch
         else
           grid = _try_word(current[:grid], current[:word], pos, dir)
           if grid
+            puts "Grid truthy"
             if words.any?
+              puts "Words truthy"
               stack.push(grid: grid, word: words.shift, dirs: directions.shuffle,
                 positions: positions.shuffle)
             else
