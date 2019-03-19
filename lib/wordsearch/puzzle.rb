@@ -34,7 +34,8 @@ module WordSearch
       @backward = backward
       @message = message
       @seed = seed
-
+      @coords = []
+      
       srand(@seed)
 
       _generate!
