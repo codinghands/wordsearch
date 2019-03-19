@@ -54,6 +54,9 @@ OptionParser.new do |opts|
   opts.on "-t", "--[no-]text" do |text|
     options[:text] = text
   end
+  opts.on "-p", "--package PACKAGE" do |package|
+    options[:package] = package
+  end
 end.parse!
 
 while ARGV.any?
@@ -83,6 +86,10 @@ puts "unused squares: #{puzzle.unused_squares} (of #{puzzle.grid.size})"
 if options[:text]
   puts
   puts puzzle.to_s(solution: options[:solve])
+elsif options[:package]
+  puts
+  puts "Packaging"
+  puzzle.package(package: options[:package])
 else
   puzzle.
     to_pdf(font_name: options[:font], clue_font: options[:clue_font] || options[:font]).
