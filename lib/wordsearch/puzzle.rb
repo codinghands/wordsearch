@@ -132,9 +132,23 @@ module WordSearch
       s
     end
     
+    def clue_coords_to_s()
+      s = ""
+      @coords.each do |clue_coord|
+        s << "#{clue_coord.word},#{clue_coord.direction},#{clue_coord.row},#{clue_coord.col}\n"
+      end
+      s
+    end
+    
     def package(package: "default")
-      puts "Packaging as #{package}"
+      puts "Packaging into #{package}"
       Dir.mkdir package
+      solved_grid = to_s(solution: true)
+      unsolved_grid = to_s(solution: false)
+      clue_coords = clue_coords_to_s()
+      File.open('#{package}/solved.txt', 'w') { |file| file.write(solved_grid) }
+      File.open('#{package}/unsolved.txt', 'w') { |file| file.write(unsolved_grid) }
+      File.open('#{package}/coords.txt', 'w') { |file| file.write(clue_coords) }
     end
 
     def to_pdf(box_size: 18, margin: 18, font_name: "Helvetica", clue_font: font_name, solution: true, clues: true)
