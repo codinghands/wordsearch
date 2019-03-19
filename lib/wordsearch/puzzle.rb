@@ -23,6 +23,7 @@ module WordSearch
 
     attr_reader :grid
     attr_reader :solution
+    attr_reader :coords
 
     def initialize(vocabulary, rows: 15, columns: 15, diagonal: false, backward: false, message: nil, seed: Time.now.to_i)
       @vocabulary = vocabulary
@@ -70,13 +71,14 @@ module WordSearch
         else
           grid = _try_word(current[:grid], current[:word], pos, dir)
           if grid
-            puts "Grid truthy"
+            # Got a solution for this word, it's now in the grid
+            @coords.push(word: current[:word], dir)
             if words.any?
-              puts "Words truthy"
+              # More words to go - add to the stack
               stack.push(grid: grid, word: words.shift, dirs: directions.shuffle,
                 positions: positions.shuffle)
             else
-              break # success!
+              break # success! all words handled
             end
           end
         end
@@ -84,7 +86,7 @@ module WordSearch
 
       @grid = grid
       @solution = grid.dup
-
+      puts @coords
       @unused_squares = @grid.fill!(@message)
     end
 
@@ -95,18 +97,13 @@ module WordSearch
 
       dr, dc = DIRS[direction]
       letters = word.chars
-      first = true
       while (row >= 0 && row < copy.rows) && (column >= 0 && column < copy.columns)
         letter = letters.shift || break
 
         if copy[row, column].nil? || copy[row, column] == letter
-          if first
-            puts "Word '#{word}' Letter '#{letter}' in row #{row} col #{column}"
-          end
           copy[row, column] = letter
           row += dr
           column += dc
-          first = false
         else
           return nil
         end
