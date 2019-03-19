@@ -87,6 +87,7 @@ module WordSearch
     end
 
     def _try_word(grid, word, position, direction)
+      puts "Trying '#{word}' Pos '#{position}' Dir #{direction}"
       copy = grid.dup
       row, column = copy.at(position)
 
