@@ -64,7 +64,7 @@ end
 options[:words].concat(ARGF.readlines.map { |word| word.strip }) if ARGV.last == "-"
 
 if options[:words].empty?
-  abort "you must specify some words to use to create the puzzle"
+  abort "you must specify some words to use to create the puzzle, eh"
 elsif options[:words].any? { |w| w.length > options[:rows] && w.length > options[:columns] }
   abort "words must all be between #{options[:rows]} and #{options[:columns]} letters"
 end
