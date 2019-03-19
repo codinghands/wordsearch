@@ -74,7 +74,6 @@ module WordSearch
               stack.push(grid: grid, word: words.shift, dirs: directions.shuffle,
                 positions: positions.shuffle)
             else
-              puts stack
               break # success!
             end
           end
@@ -98,9 +97,9 @@ module WordSearch
         letter = letters.shift || break
 
         if copy[row, column].nil? || copy[row, column] == letter
-          #if first
-          #  puts "Letter '#{letter}' in row #{row} col #{column}"
-          #end
+          if first
+            puts "Word '#{word}' Letter '#{letter}' in row #{row} col #{column}"
+          end
           copy[row, column] = letter
           row += dr
           column += dc
