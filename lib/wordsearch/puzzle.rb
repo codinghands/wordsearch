@@ -23,8 +23,8 @@ module WordSearch
 
     attr_reader :grid
     attr_reader :solution
-    attr_reader :coords
-
+    attr_reader :coords # Array of objects each storing the zero-index row / column + direction of a word
+    
     def initialize(vocabulary, rows: 15, columns: 15, diagonal: false, backward: false, message: nil, seed: Time.now.to_i)
       @vocabulary = vocabulary
 
