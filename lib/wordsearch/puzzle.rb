@@ -71,6 +71,7 @@ module WordSearch
           stack.pop
         else
           grid = _try_word(current[:grid], current[:word], pos, dir)
+          puts "Called tryword with #{current[:word]}, result was #{grid}"
           if grid
             # Got a solution for this word, it's now in the grid
             @coords.push({ word: current[:word], direction: dir, row: pos / @columns, col: pos % @columns })       
