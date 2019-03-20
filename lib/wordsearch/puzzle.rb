@@ -68,12 +68,12 @@ module WordSearch
 
         if pos.nil?
           words.unshift(current[:word])
-          # Got a solution for this word, it's now in the grid
-          @coords.push({ word: current[:word], direction: dir, row: pos / @columns, col: pos % @columns })
           stack.pop
         else
           grid = _try_word(current[:grid], current[:word], pos, dir)
           if grid
+            # Got a solution for this word, it's now in the grid
+            @coords.push({ word: current[:word], direction: dir, row: pos / @columns, col: pos % @columns })       
             if words.any?
               # More words to go - add to the stack
               stack.push(grid: grid, word: words.shift, dirs: directions.shuffle,
