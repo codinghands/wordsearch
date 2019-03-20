@@ -71,7 +71,7 @@ module WordSearch
           words.unshift(current[:word])
           stack.pop
           #puts "Popped stack"
-          word_index--
+          word_index -= 1
         else
           grid = _try_word(current[:grid], current[:word], pos, dir)
           if grid
@@ -83,7 +83,7 @@ module WordSearch
               # More words to go - add to the stack
               stack.push(grid: grid, word: words.shift, dirs: directions.shuffle,
                 positions: positions.shuffle)
-              word_index++
+              word_index += 1
             else
               puts "All done"
               break # success! all words handled
