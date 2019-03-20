@@ -135,7 +135,8 @@ module WordSearch
     def clue_coords_to_s()
       s = ""
       @coords.each do |clue_coord|
-        s << "#{clue_coord[:word]},#{clue_coord[:direction]},#{clue_coord[:row]},#{clue_coord[:col]}\n"
+        puts clue_coord
+        #s << "#{clue_coord[:word]},#{clue_coord[:direction]},#{clue_coord[:row]},#{clue_coord[:col]}\n"
       end
       s
     end
