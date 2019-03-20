@@ -34,7 +34,7 @@ module WordSearch
       @backward = backward
       @message = message
       @seed = seed
-      @coords = []
+      @coords = {}
       
       srand(@seed)
 
@@ -43,7 +43,7 @@ module WordSearch
 
     def _generate!
       words = @vocabulary.dup
-
+      puts words
       directions = %i(right down)
       directions += %i(rightdown) if @diagonal
       directions += %i(left up) if @backward
@@ -52,7 +52,8 @@ module WordSearch
       grid = WordSearch::Grid.new(@rows, @columns)
       positions = (0...grid.size).to_a
       stack = [ { grid: grid, word: words.shift, dirs: directions.shuffle, positions: positions.shuffle } ]
-
+      word_index = 0
+      
       while true
         current = stack.last
         raise "no solution possible" if !current
@@ -69,18 +70,20 @@ module WordSearch
         if pos.nil?
           words.unshift(current[:word])
           stack.pop
-          puts "Popped stack"
+          #puts "Popped stack"
+          word_index--
         else
           grid = _try_word(current[:grid], current[:word], pos, dir)
           if grid
-            puts "Called tryword with '#{current[:word]}', got a grid back"
+            #puts "Called tryword with '#{current[:word]}', got a grid back"
             # Got a solution for this word, it's now in the grid
-            @coords.push({ word: current[:word], direction: dir, row: pos / @columns, col: pos % @columns })       
+            @coords[word_index] = { word: current[:word], direction: dir, row: pos / @columns, col: pos % @columns }       
             if words.any?
-              puts "More words! Pushing grid to stack"
+              #puts "More words! Pushing grid to stack"
               # More words to go - add to the stack
               stack.push(grid: grid, word: words.shift, dirs: directions.shuffle,
                 positions: positions.shuffle)
+              word_index++
             else
               puts "All done"
               break # success! all words handled
