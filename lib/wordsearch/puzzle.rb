@@ -70,16 +70,14 @@ module WordSearch
         if pos.nil?
           words.unshift(current[:word])
           stack.pop
-          #puts "Popped stack"
-          word_index -= 1
+          word_index -= 1 # We're backtracking to a previous word, for which we may find a new position, so be ready to overwrite
         else
           grid = _try_word(current[:grid], current[:word], pos, dir)
           if grid
-            #puts "Called tryword with '#{current[:word]}', got a grid back"
-            # Got a solution for this word, it's now in the grid
+            # Got a solution for this word, it's now in the grid. It may change if we backtrack,
+            # but word_index will be overwritten with the latest position / direction each time
             @coords[word_index] = { word: current[:word], direction: dir, row: pos / @columns, col: pos % @columns }       
             if words.any?
-              #puts "More words! Pushing grid to stack"
               # More words to go - add to the stack
               stack.push(grid: grid, word: words.shift, dirs: directions.shuffle,
                 positions: positions.shuffle)
