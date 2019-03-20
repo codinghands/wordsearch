@@ -141,8 +141,8 @@ module WordSearch
     
     def clue_coords_to_s()
       s = ""
-      @coords.each do |item|
-        s << "#{item[:word]},#{item[:direction]},#{item[:row]},#{item[:col]}\n"
+      @coords.each do |index, item|
+        s << "#{index},#{item[:word]},#{item[:direction]},#{item[:row]},#{item[:col]}\n"
       end
       s
     end
